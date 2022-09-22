@@ -4,9 +4,10 @@ import br.edu.ifsp.ads.tc1.domains.Cliente;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class ClienteService implements DAOService<Cliente, String> {
-    private static final Map<String, Cliente> clientes = new HashMap<>();
+    private final Map<String, Cliente> clientes = new HashMap<>();
 
     @Override
     public Map<String, Cliente> listaTodos() {
@@ -24,6 +25,12 @@ public class ClienteService implements DAOService<Cliente, String> {
         if (clientes.get(cpf) != null) {
             System.out.println("Erro!\n");
             return;
+        }
+        for (String telefone : cliente.getTelefones()) {
+            if (!Pattern.matches("(\\([0-9]{2}\\)[0-9]{5}-[0-9]{4})", telefone)) {
+                System.out.printf("Telefone [%s] inválido!\n", telefone);
+                return;
+            }
         }
         clientes.put(cpf, cliente);
     }

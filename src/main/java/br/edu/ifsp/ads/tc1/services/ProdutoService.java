@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ProdutoService implements DAOService<Produto, Integer> {
-    private static final Map<Integer, Produto> produtos = new HashMap<>();
+    private final Map<Integer, Produto> produtos = new HashMap<>();
 
     @Override
     public Map<Integer, Produto> listaTodos() {
@@ -40,7 +40,7 @@ public class ProdutoService implements DAOService<Produto, Integer> {
 
     @Override
     public void excluir(Integer integer) {
-        if (produtos.get(integer) != null) {
+        if (produtos.get(integer) == null) {
             System.out.println("Erro!\n");
             return;
         }

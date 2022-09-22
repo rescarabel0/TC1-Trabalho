@@ -97,11 +97,11 @@ public class Cliente {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Cliente cliente = (Cliente) o;
-        return Objects.equals(cpf, cliente.cpf);
+        return Objects.equals(cpf, cliente.cpf) && Objects.equals(nome, cliente.nome) && Objects.equals(dataDeNascimento, cliente.dataDeNascimento) && Objects.equals(sexo, cliente.sexo) && Objects.equals(salario, cliente.salario) && Objects.equals(emails, cliente.emails) && Objects.equals(telefones, cliente.telefones);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(cpf);
+        return Objects.hash(cpf, nome, dataDeNascimento, sexo, salario, emails, telefones);
     }
 }

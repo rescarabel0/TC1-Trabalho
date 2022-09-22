@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CompraService implements DAOService<Compra, Integer> {
-    private static final Map<Integer, Compra> compras = new HashMap<>();
+    private final Map<Integer, Compra> compras = new HashMap<>();
 
     @Override
     public Map<Integer, Compra> listaTodos() {

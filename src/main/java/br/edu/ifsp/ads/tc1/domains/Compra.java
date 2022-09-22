@@ -51,11 +51,11 @@ public class Compra {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Compra compra = (Compra) o;
-        return id == compra.id;
+        return id == compra.id && Objects.equals(cliente, compra.cliente) && Objects.equals(produto, compra.produto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, cliente, produto);
     }
 }

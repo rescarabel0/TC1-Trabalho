@@ -118,11 +118,11 @@ public class Produto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Produto produto = (Produto) o;
-        return Objects.equals(codigo, produto.codigo);
+        return Objects.equals(codigo, produto.codigo) && Objects.equals(descricao, produto.descricao) && Objects.equals(tamanho, produto.tamanho) && Objects.equals(peso, produto.peso) && Objects.equals(altura, produto.altura) && Objects.equals(largura, produto.largura) && Objects.equals(preco, produto.preco) && Objects.equals(desconto, produto.desconto) && Objects.equals(dataDeValidade, produto.dataDeValidade);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(codigo);
+        return Objects.hash(codigo, descricao, tamanho, peso, altura, largura, preco, desconto, dataDeValidade);
     }
 }
