@@ -7,9 +7,9 @@ public interface DAOService<T, K> {
 
     T listaUm(K k);
 
-    void salvar(T t);
+    void salvar(T t) throws Exception;
 
-    void atualizar(T t);
+    void atualizar(T t) throws Exception;
 
     void excluir(K k);
 }

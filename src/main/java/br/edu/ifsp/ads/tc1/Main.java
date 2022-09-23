@@ -62,7 +62,12 @@ public class Main {
                             List<String> telefones = List.of(reader.nextLine().split(","));
 
                             var cliente = new Cliente(cpf, nome, new Date(dataDeNascimento), sexo, salario, emails, telefones);
-                            clienteService.salvar(cliente);
+                            try {
+                                clienteService.salvar(cliente);
+                            } catch (Exception e) {
+                                System.out.println("Erro!");
+                                break;
+                            }
                             System.out.println("Pronto!");
                             break;
                         }
@@ -84,7 +89,12 @@ public class Main {
                             List<String> telefones = List.of(reader.nextLine().split(","));
 
                             cliente = new Cliente(cpf, nome, new Date(dataDeNascimento), sexo, salario, emails, telefones);
-                            clienteService.atualizar(cliente);
+                            try {
+                                clienteService.atualizar(cliente);
+                            } catch (Exception e) {
+                                System.out.println("Erro!");
+                                break;
+                            }
                             System.out.println("Pronto!");
                             break;
                         }
