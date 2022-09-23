@@ -3,6 +3,7 @@ package br.edu.ifsp.ads.tc1.services;
 import br.edu.ifsp.ads.tc1.domains.Cliente;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Date;
@@ -88,6 +89,7 @@ class ClienteServiceTest {
 
     @Test
     @DisplayName("Atualiza Cliente")
+    @Order(0)
     void atualizar() throws Exception {
         clienteService.salvar(cliente);
         var date = java.util.Date.from(Instant.now());
@@ -99,12 +101,25 @@ class ClienteServiceTest {
         cliente.setTelefones(List.of());
         cliente.setDataDeNascimento(date);
 
-        assertAll("Teste pós atualizar",
-                () -> assertNotEquals(cliente, clienteService.listaUm("123.456.789-10")),
-                () -> {
-                    clienteService.atualizar(cliente);
-                    var editado = clienteService.listaUm("123.456.789-10");
-                    assertEquals(cliente, editado);
-                });
+        clienteService.atualizar(cliente);
+        var clienteAtualizado = clienteService.listaUm("123.456.789-10");
+
+        assertAll("Teste gets pós atualizar",
+                () -> assertEquals("123.456.789-10", clienteAtualizado.getCpf()),
+                () -> assertEquals("Editado", clienteAtualizado.getNome()),
+                () -> assertEquals("Feminino", clienteAtualizado.getSexo()),
+                () -> assertEquals(List.of(), clienteAtualizado.getEmails()),
+                () -> assertEquals(List.of(), clienteAtualizado.getTelefones()),
+                () -> assertEquals(date, clienteAtualizado.getDataDeNascimento())
+        );
+    }
+
+    @Test
+    @DisplayName("Excluir usuário")
+    void excluir() throws Exception {
+        clienteService.salvar(cliente);
+        assertEquals(cliente, clienteService.listaUm("123.456.789-10"));
+        clienteService.excluir("123.456.789-10");
+        assertNull(clienteService.listaUm("123.456.789-10"));
     }
 }

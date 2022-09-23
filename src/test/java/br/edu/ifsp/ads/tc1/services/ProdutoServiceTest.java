@@ -3,6 +3,7 @@ package br.edu.ifsp.ads.tc1.services;
 import br.edu.ifsp.ads.tc1.domains.Produto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Date;
@@ -57,6 +58,7 @@ class ProdutoServiceTest {
 
     @Test
     @DisplayName("Produto foi atualizado com sucesso com uso de Sets")
+    @Order(0)
     void atualizar() {
         var now = java.util.Date.from(Instant.now());
         produtoService.salvar(produto);
